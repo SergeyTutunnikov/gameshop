@@ -18,6 +18,7 @@ class Game(models.Model):
     updated=models.DateTimeField(auto_now=True)
     description=models.TextField(blank=True,null=True)
     image=models.ImageField(blank=True,null=True)
+    slug=models.SlugField(blank=True,null=True)
     def __str__(self):
         return f'{self.title} - {self.company}'
 # genre,owner,image,characters,характеристики(eng),mb more~~

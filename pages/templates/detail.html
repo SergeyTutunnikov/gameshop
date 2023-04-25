@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}
+Gaming shop - {{game.title}}
+{% endblock title %}
+{% block content %}
+<div class="shop">
+    <div class="game horizontal">
+        <img src="{{game.image.url}}" alt="Nope~">
+        <div class="game_content">
+            <h2>{{game.title|upper}}</h2>
+            <p>{{game.description}}</p>
+            <p>{{game.price}}$</p>
+            <h3>Авторы - {{game.company}}</h3>
+            <h3 class='genre'>{{game.genre}}</h3>
+            <p>время добавления - {{game.created|date:'d/m/Y H:i:s'}}</p>
+            <p>время последнего обновления - {{game.updated|date:'d/m/Y H:i:s'}}</p>
+            <div class="btns">
+                <a href="">Купить</a>
+                <a href="">В избранное</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
