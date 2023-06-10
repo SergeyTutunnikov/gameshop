@@ -3,22 +3,25 @@
 Gaming shop
 {% endblock title %}
 {% block content %}
-<h1>Магазин</h1>
-<div class="shop">
-    {%for game in games%}
-        <div class="game">
-            <img src="{{game.image.url}}" alt="Nope~">
-            <div class="game_content">
-                <h3>{{game.title|upper}}</h3>
-                <p>{{game.description|truncatewords:10}}</p>
-                <p>{{game.price}}$</p>
-                <div class="btns">
-                    <a href="">Купить</a>
-                    <a href="">В избранное</a>
-                    <a href="{% url 'detail' game.slug %}">Подробнее</a>
+<main class="container">
+    <h1>Магазин</h1>
+    <div class="shop">
+        {%for game in games%}
+            <div class="game">
+                <img src="{{game.image.url}}" alt="Nope~">
+                <div class="game_content">
+                    <h3>{{game.title|upper}}</h3>
+                    <p>{{game.description|truncatewords:10}}</p>
+                    <p>{{game.price}}$</p>
+                    <div class="btns">
+                        <a href="">Купить</a>
+                        <a href="">В избранное</a>
+                        <a href="{% url 'detail' game.slug %}">Подробнее</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    {%endfor%}
-</div>
+        {%endfor%}
+    </div>
+</main>
+
 {% endblock content %}

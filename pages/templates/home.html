@@ -1,7 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}
 Gaming shop
 {% endblock title %}
-{% block content %}
+{% block header %}
+<div class="first_screen" style="background-image:url({%static 'img/bg.jpeg'%});">
+    <div class="white">
+        <h1>Gaming Shop</h1>
+        <hr>
+        <h2>Игры на любой вкус</h2>  
+    </div>
+    
 
-{% endblock content %}
+
+</div>
+{% endblock header %}

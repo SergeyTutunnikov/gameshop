@@ -1,13 +1,19 @@
 <nav class="menu">
     <div class="container menu_content">
         <div class="left">
-            <a href="">Главная</a>
+            <a href={% url 'home' %}>Главная</a>
             <a href="{%url 'shop'%}">Магазин</a>
             <a href="">Корзина</a>
         </div>
         <div class="right">
-            <a href="">Регистрация</a>
-            <a href="">Войти</a>
+            {% if not request.user.is_authenticated%}
+            <a href={% url 'register' %}>Регистрация</a>
+            <a href="{% url 'login' %}">Войти</a>
+            {% else %}
+            <span>{{request.user.username}}</span>
+            <a href="{% url 'log_out' %}">Выйти</a>
+            <a href="{% url 'password_change' %}">Сменить пароль</a>
+            {% endif %}
         </div>
     </div>
 </nav>

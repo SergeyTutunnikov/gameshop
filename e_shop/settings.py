@@ -11,7 +11,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'products',
-    'pages'
+    'pages',
+    'accounts',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -59,7 +60,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
@@ -67,3 +68,13 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT=BASE_DIR/'media'
 MEDIA_URL='/media/'
+
+
+
+EMAIL_BACKEND='django.core.mail.backends.console.EmalBackend'
+EMAIL_HOST='smtp.mail.ru'
+EMAIL_HOST_USER='stutunnikov21@mail.ru'
+EMAIL_HOST_PASSWORD='!_goodmorninG13'
+EMAIL_PORT=2525
+EMAIL_USE_TLS=True
+EMAIL_USE_SSL=False

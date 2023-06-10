@@ -21,6 +21,8 @@ class Game(models.Model):
     slug=models.SlugField(blank=True,null=True)
     def __str__(self):
         return f'{self.title} - {self.company}'
+
+        
 # genre,owner,image,characters,характеристики(eng),mb more~~
 # git commit -m"Updated Model/Created Genre"
 

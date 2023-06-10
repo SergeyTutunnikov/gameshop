@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}
+Gaming shop - зарегистрироваться
+{% endblock title %}
+{% block content %}
+<main class="container">
+    <h1>Регистрация</h1>
+    <div class="login ">
+        <form method="POST">
+            {% csrf_token %}
+            <p><label for=''>Имя пользователя</label> 
+                {{form.username}} 
+                <span class="error">{{form.errors.username}}</span>    
+            </p>
+
+            <p><label for="">Почта</label>
+                {{form.email}}
+                <span class="error">{{form.errors.email}}</span>    
+            </p>
+
+            <p><label for="">Пароль</label>
+                {{form.password1}}
+                <span class="error">{{form.errors.password1}}</span>    
+            </p>
+
+            <p><label for="">Подтвердите пароль</label>
+                {{form.password2}}
+                <span class="error">{{form.errors.password2}}</span>    
+            </p>
+
+            <button>Cоздать аккаунт</button>
+            <a href={% url 'login' %}>Уже есть аккаунт?</a>        
+        </form>
+    </div>
+</main>
+
+{% endblock content %}

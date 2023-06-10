@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}
+Gaming shop - войти
+{% endblock title %}
+{% block content %}
+<main class="container">
+    <h1>Вход в аккаунт</h1>
+    <div class="login ">
+        <form method="POST">
+            {% csrf_token %}
+            <input name="username" type="text" placeholder="Имя пользователя">
+            <input name="password" type="password" placeholder="Пароль">
+            {%for message in messages%}
+            <p class="error">{{message}}</p>
+            {%endfor%}
+            <button>Войти</button>
+            <a href={% url 'register' %}>Нет аккаунта?</a>
+            <a href={% url 'password_reset' %}>Забыли пароль?</a>
+            
+        </form>
+    </div>
+</main>
+
+{% endblock content %}

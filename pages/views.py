@@ -15,4 +15,4 @@ class ShopPage(ListView):
 class GamePage(DetailView):
     template_name="detail.html"
     model=Game
-    context_object_name="game"
+    context_object_name='game'
