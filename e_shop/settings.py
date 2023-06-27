@@ -71,10 +71,13 @@ MEDIA_URL='/media/'
 
 
 
-EMAIL_BACKEND='django.core.mail.backends.console.EmalBackend'
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST='smtp.mail.ru'
 EMAIL_HOST_USER='stutunnikov21@mail.ru'
-EMAIL_HOST_PASSWORD='!_goodmorninG13'
+EMAIL_HOST_PASSWORD='nE5Fv8dpntajjNNLT6dX'
 EMAIL_PORT=2525
 EMAIL_USE_TLS=True
 EMAIL_USE_SSL=False
+DEFAULT_FROM_EMAIL=EMAIL_HOST_USER
+
+# !_goodmorninG13

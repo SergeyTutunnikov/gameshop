@@ -6,6 +6,14 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.messages import error
 from .form import CreateUserForm
 from django.urls import reverse_lazy
+from django.core.mail import EmailMessage
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+
+
 class LoginPage(View):
     def get(self,request):
         return render(request,"login.html")
@@ -28,3 +36,30 @@ class RegisterPage(CreateView):
     template_name='register.html'
     form_class=CreateUserForm
     success_url=reverse_lazy('login')
+    def form_valid(self,form):
+        user=form.instance
+        if User.objects.filter(email=user.email).exists():
+            form.add_error('email','Данная почта занята')
+            return self.form_invalid(form)
+        else:
+            user.active=False
+            token=default_token_generator.make_token(user)
+            uid=urlsafe_base64_encode(force_bytes(user.pk))
+            subject='Gaming Shop - активация аккаунта'
+            template_name='activate_email.html'
+            context={
+                'email':user.email,
+                'username':user.username,
+                'protocol':self.request.scheme,
+                'domain':get_current_site(self.request).domain,
+                'uid':uid,
+                'token':token
+            }
+            body=render_to_string(template_name,context)
+            mail=EmailMessage(subject,body,to=[user.email])
+            mail.send()
+        return super().form_valid(form)
+        
+
+def activate_page(request):
+    return render(request,'activate_email_confirm.html')
