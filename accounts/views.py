@@ -8,11 +8,10 @@ from .form import CreateUserForm
 from django.urls import reverse_lazy
 from django.core.mail import EmailMessage
 from django.contrib.auth.tokens import default_token_generator
-from django.utils.http import urlsafe_base64_encode
-from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
+from django.utils.encoding import force_bytes,force_str
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
-
 
 class LoginPage(View):
     def get(self,request):
@@ -42,7 +41,8 @@ class RegisterPage(CreateView):
             form.add_error('email','Данная почта занята')
             return self.form_invalid(form)
         else:
-            user.active=False
+            user.is_active=False
+            user.save()
             token=default_token_generator.make_token(user)
             uid=urlsafe_base64_encode(force_bytes(user.pk))
             subject='Gaming Shop - активация аккаунта'
@@ -61,5 +61,20 @@ class RegisterPage(CreateView):
         return super().form_valid(form)
         
 
-def activate_page(request):
-    return render(request,'activate_email_confirm.html')
+def activate_page(request,uidb64,token):
+    # try:
+        user_id=force_str(urlsafe_base64_decode(uidb64))
+        print(user_id)
+        print(token)
+        user=User.objects.get(pk=user_id)
+       
+        # if default_token_generator.check_token(user,token):
+        user.is_active=True
+        user.save()
+        return render(request,'activate_email_confirm.html')
+        # else:
+            # user.delete()
+            # return render(request,'activate_error.html')
+    # except:
+        # return render(request,'activate_error.html')
+    
